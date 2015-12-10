@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -59,7 +59,7 @@ namespace Labb5
             {
                 if (myStock[i] is Plate)
                     plateCount++;
-                else if (myStock[i] is Juice)
+                else if (myStock[i] is Juice )
                     juiceCount++;
             }
             Console.WriteLine($"Number of plates is : {plateCount}.");
@@ -113,6 +113,7 @@ namespace Labb5
                         catch (System.FormatException e)
                         {
                             Console.WriteLine("Please enter if product is 'EG' or 'Krav'");
+                            Stockitem.stockCount--;
                         }
                         break;
                     case 2:
@@ -144,25 +145,31 @@ namespace Labb5
                         catch
                         {
                             Console.WriteLine("Please enter if you want 'Orange' or 'Apple");
+                            Stockitem.stockCount--;
                         }
                         break;
                     case 4:
                         Console.WriteLine("You choose Plate,");
+                        inputId = validateIdInput(inputId);
 
-                        Console.WriteLine("Enter the name of your item:");
-                        inputName = Console.ReadLine();
+                        Console.WriteLine("Enter name of plate");
+                        string plateName = Console.ReadLine();
 
-                        Console.WriteLine("Enter a eco-marking: /Krav or Eg ?");
-                        inputMarkning = Console.ReadLine();
-
-                        Console.WriteLine("Enter a type: /Flat or Deep?");
-                        inputType = Console.ReadLine();
-
-                        Plate newPlateItem = new Plate(inputType, inputId, inputName);
-                        myStock.AddItem(newPlateItem);
-
+                        Console.WriteLine("Enter type: Flat or Deep");
+                        string plateType = Console.ReadLine();
+                        try
+                        {
+                            Plate newPlate = new Plate(plateType, inputId, plateName);
+                            myStock.AddItem(newPlate);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Please enter if you want Flat or Deep");
+                            Stockitem.stockCount--;
+                        }
                         break;
                     case 5:
+
                         break;
 
                     default:
@@ -172,8 +179,22 @@ namespace Labb5
                 }
                 break;
             }
-            //myStock.PrintItems();
+           
         }
+
+        
+
+            //inputName = Console.ReadLine();
+
+            //Console.WriteLine("Enter a eco-marking: /Krav or Eg ?");
+            //inputMarkning = Console.ReadLine();
+
+            //Console.WriteLine("Enter a type: /Flat or Deep?");
+            //inputType = Console.ReadLine();
+
+            //Plate newPlateItem = new Plate(inputType, inputId, inputName);
+            //myStock.AddItem(newPlateItem);
+        
 
         private static void validateEcoMarking(Stock myStock, bool itemCreated, int inputId, string inputName)
         {
@@ -195,6 +216,7 @@ namespace Labb5
                 }
             }
         }
+        
 
         private static int validateIdInput(int inputId)
         {
@@ -216,3 +238,14 @@ namespace Labb5
         }
     }
 }
+
+
+
+            
+                       
+
+
+                 
+             
+      
+
